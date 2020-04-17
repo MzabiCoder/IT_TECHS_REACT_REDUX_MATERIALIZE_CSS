@@ -1,0 +1,47 @@
+{
+  "logs": [
+    {
+      "id": 1,
+      "message": "changed my drive",
+      "attention": false,
+      "date": "03-02-2019",
+      "tech": "Sam"
+    },
+    {
+      "id": 2,
+      "message": "changed my disc",
+      "attention": true,
+      "date": "03-02-2019",
+      "tech": "Karim"
+    },
+    {
+      "id": 1,
+      "message": "changed my Tv",
+      "attention": false,
+      "date": "03-02-2019",
+      "tech": "Jenn"
+    }
+  ],
+  "techs": [
+    {
+      "fname": "soufiane",
+      "lname": "abdellaoui",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "fname": "jenn",
+      "lastname": "adam"
+    },
+    {
+      "id": 3,
+      "fname": "mike",
+      "lastname": "mike"
+    },
+    {
+      "fname": "adil",
+      "lname": "fannane",
+      "id": 4
+    }
+  ]
+}
