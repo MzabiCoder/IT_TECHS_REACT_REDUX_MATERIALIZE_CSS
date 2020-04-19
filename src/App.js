@@ -9,12 +9,15 @@ import AddLog from './Components/logs/AddLog'
 import EditLog from './Components/layouts/EditLog'
 import Addtech from './Components/techs/Addtech'
 import Techs from './Components/techs/Techs'
+import { Provider } from 'react-redux'
+import store from './store'
 
 const App = () => {
   useEffect(() => {
     M.AutoInit()
   })
   return (
+    <Provider store={store}>
     <Fragment>
       <SearchBar />
         <div className="container">
@@ -25,8 +28,8 @@ const App = () => {
         <Techs/>
         <AddBtn/>
       </div>
-    
-    </Fragment>
+      </Fragment>
+      </Provider>
   );
 }
 

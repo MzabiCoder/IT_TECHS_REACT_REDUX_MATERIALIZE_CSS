@@ -1,20 +1,31 @@
 import React, { useState } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
+import { addLog } from '../../actions/getLogs'
+import { connect } from 'react-redux'
+
  
-const AddLog = () => {
+const AddLog = ({addLog}) => {
     const [tech,setTech]=useState('')
     const [attention,setAttention]=useState(false)
     const [message, setMessage] = useState('')
     const onSubmit = e => {
         e.preventDefault()
         if (message === 0 || tech === '') {
-         M.toast({html:'Please Enter a message and tech !!'})
+            M.toast({ html: 'Please Enter a message and tech !!' })
+            return false
         } else {
-            console.log('success')
+            const newLog = {
+                tech,
+                attention,
+                message,
+                date:new Date()
+            }
+            M.toast({html:`Log added by ${tech}`})
+            addLog(newLog)
             setMessage('')
-            setAttention('')
             setAttention(false)
-     }
+           
+      }
         
     }
     return (
@@ -44,7 +55,7 @@ const AddLog = () => {
                     <div className="input-field">
                           <p>
                         <label>
-                          <input type="checkbox" checked={attention} value={attention} onChange={e => setAttention(!attention)} />
+                          <input type="checkbox" checked={attention} value={attention} onChange={() => setAttention(!attention)} />
                           <span>Needs Attention</span>
                         </label>
                       </p>
@@ -67,4 +78,4 @@ const modalStyle = {
     height:'80%'
 }
 
-export default AddLog
+export default connect(null,{addLog})(AddLog)

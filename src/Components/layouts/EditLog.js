@@ -1,17 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
- 
-const EditLog = () => {
+import {updateLog,getLog } from '../../actions/getLogs'
+import {connect} from 'react-redux'
+  
+const EditLog = ({current,updateLog,getLog}) => {
     const [tech,setTech]=useState('')
     const [attention,setAttention]=useState(false)
     const [message, setMessage] = useState('')
+
+    useEffect(() => {
+        if (current) {
+            setTech(current.tech)
+            setAttention(current.attention)
+            setMessage(current.message) 
+       }
+       
+        // eslint-disable
+    },[current])
     const onSubmit = e => {
         e.preventDefault()
         if (message === 0 || tech === '') {
             M.toast({ html: 'Please Enter a message and tech !!' })
             
         } else {
-            console.log('success')
+            const UpdateLog = {
+                id: current.id,
+                tech,
+                attention,
+                message,
+                date: new Date()
+                
+            }
+            updateLog(UpdateLog)
+            getLog()
             setMessage('')
             setAttention('')
             setAttention(false)
@@ -25,9 +46,7 @@ const EditLog = () => {
                 <div className="row">
                     <div className="input-field">
                         <input type="text" name="message" value={message} onChange={(e) => setMessage(e.target.value)} />
-                        <label htmlFor="message" className="active">
-                        Message
-                        </label>
+                        
                     </div>
                 </div>
                 <div className="row">
@@ -67,5 +86,8 @@ const modalStyle = {
     width: '80%',
     height:'80%'
 }
+const map = state => ({
+    current:state.log.current
+})
 
-export default EditLog
+export default connect(map,{updateLog,getLog})(EditLog)
